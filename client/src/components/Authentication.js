@@ -7,7 +7,13 @@ export default function Authentication() {
     const authContext = useContext(AuthContext);
 
     const loginHandler = () => {
-        authContext.login();
+        // API CALLS TO SERVER
+
+        // Response from server
+        const userResponse = {
+            token: 'abcdefghijklmnop12369420',
+        };
+        authContext.login(userResponse.token);
     };
 
     const logoutHandler = () => {
