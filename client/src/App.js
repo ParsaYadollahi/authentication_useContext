@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import react, { useState } from 'react';
 import './App.css';
 
+// Components
+import Authentication from './components/Authentication';
+import ProtectedPage from './components/ProtectedPage';
+
+// Utils
+import { AuthContext } from './utils/context';
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    const [isLoggedIn, setLoggedIn] = useState(false);
+
+    const login = () => {
+        setLoggedIn(true);
+    };
+
+    const logout = () => {
+        setLoggedIn(false);
+    };
+
+    return (
+        <AuthContext.Provider
+            value={{
+                isLoggedIn: isLoggedIn,
+                login: login,
+                logout: logout,
+            }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            <Authentication />
+            <ProtectedPage />
+        </AuthContext.Provider>
+    );
 }
 
 export default App;
